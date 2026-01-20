@@ -14,6 +14,7 @@ import {
   UNAUTHENTICATED_USER_SHARING,
   WEBROOT,
 } from "../helpers/env";
+import { t as translate } from "../helpers/i18n";
 import { FIRST_RUN, userService } from "./user";
 
 export const root = new Elysia().use(userService).get(
@@ -44,7 +45,7 @@ export const root = new Elysia().use(userService).get(
       user = { id: newUserId };
       if (!auth) {
         return {
-          message: "No auth cookie, perhaps your browser is blocking cookies.",
+          message: translate('no_auth_cookie'),
         };
       }
 
@@ -121,7 +122,7 @@ export const root = new Elysia().use(userService).get(
             `}
           >
             <article class="article">
-              <h1 class="mb-4 text-xl">Convert</h1>
+              <h1 class="mb-4 text-xl">{translate('convert')}</h1>
               <div class="mb-4 scrollbar-thin max-h-[50vh] overflow-y-auto">
                 <table
                   id="file-list"
@@ -142,7 +143,7 @@ export const root = new Elysia().use(userService).get(
                 `}
               >
                 <span>
-                  <b>Choose a file</b> or drag it here
+                  {translate('choose_file_or_drag')}
                 </span>
                 <input
                   type="file"
@@ -162,7 +163,7 @@ export const root = new Elysia().use(userService).get(
                 <input
                   type="search"
                   name="convert_to_search"
-                  placeholder="Search for conversions"
+                  placeholder={translate('search_conversions')}
                   autocomplete="off"
                   class="w-full rounded-sm bg-neutral-800 p-4"
                 />
@@ -210,7 +211,7 @@ export const root = new Elysia().use(userService).get(
                   {/* Hidden element which determines the format to convert the file too and the converter to use */}
                   <select name="convert_to" aria-label="Convert to" required hidden>
                     <option selected disabled value="">
-                      Convert to
+                      {translate('convert_to')}
                     </option>
                     {Object.entries(getAllTargets()).map(([converter, targets]) => (
                       <optgroup label={converter}>
@@ -225,14 +226,14 @@ export const root = new Elysia().use(userService).get(
                 </div>
               </article>
               <input
-                class={`
-                  w-full btn-primary opacity-100
-                  disabled:cursor-not-allowed disabled:opacity-50
-                `}
-                type="submit"
-                value="Convert"
-                disabled
-              />
+                  class={`
+                    w-full btn-primary opacity-100
+                    disabled:cursor-not-allowed disabled:opacity-50
+                  `}
+                  type="submit"
+                  value={translate('convert_button')}
+                  disabled
+                />
             </form>
           </main>
           <script src="script.js" defer />

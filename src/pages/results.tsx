@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import db from "../db/db";
 import { Filename, Jobs } from "../db/types";
 import { ALLOW_UNAUTHENTICATED, WEBROOT } from "../helpers/env";
+import { t as translate } from "../helpers/i18n";
 import { DownloadIcon } from "../icons/download";
 import { DeleteIcon } from "../icons/delete";
 import { EyeIcon } from "../icons/eye";
@@ -21,7 +22,7 @@ function ResultsArticle({
   return (
     <article class="article">
       <div class="mb-4 flex items-center justify-between">
-        <h1 class="text-xl">Results</h1>
+        <h1 class="text-xl">{translate('results')}</h1>
         <div class="flex flex-row gap-4">
           <a
             style={files.length !== job.num_files ? "pointer-events: none;" : ""}
@@ -29,7 +30,7 @@ function ResultsArticle({
             href={`${WEBROOT}/delete/${job.id}`}
             {...(files.length !== job.num_files ? { disabled: true, "aria-busy": "true" } : "")}
           >
-            <DeleteIcon /> <p>Delete</p>
+            <DeleteIcon /> <p>{translate('delete')}</p>
           </a>
           <a
             style={files.length !== job.num_files ? "pointer-events: none;" : ""}
@@ -38,10 +39,10 @@ function ResultsArticle({
             class="flex btn-primary flex-row gap-2 text-contrast"
             {...(files.length !== job.num_files ? { disabled: true, "aria-busy": "true" } : "")}
           >
-            <DownloadIcon /> <p>Tar</p>
+            <DownloadIcon /> <p>{translate('tar')}</p>
           </a>
           <button class="flex btn-primary flex-row gap-2 text-contrast" onclick="downloadAll()">
-            <DownloadIcon /> <p>All</p>
+            <DownloadIcon /> <p>{translate('all')}</p>
           </button>
         </div>
       </div>
@@ -72,7 +73,7 @@ function ResultsArticle({
                 sm:px-4
               `}
             >
-              Converted File Name
+              {translate('converted_file_name')}
             </th>
             <th
               class={`
@@ -80,7 +81,7 @@ function ResultsArticle({
                 sm:px-4
               `}
             >
-              Status
+              {translate('status')}
             </th>
             <th
               class={`
@@ -88,7 +89,7 @@ function ResultsArticle({
                 sm:px-4
               `}
             >
-              Actions
+              {translate('actions')}
             </th>
           </tr>
         </thead>
@@ -146,7 +147,7 @@ export const results = new Elysia()
       if (!job) {
         set.status = 404;
         return {
-          message: "Job not found.",
+          message: translate('job_not_found'),
         };
       }
 
@@ -192,7 +193,7 @@ export const results = new Elysia()
       if (!job) {
         set.status = 404;
         return {
-          message: "Job not found.",
+          message: translate('job_not_found'),
         };
       }
 

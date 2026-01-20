@@ -12,6 +12,7 @@ import {
   HTTP_ALLOWED,
   WEBROOT,
 } from "../helpers/env";
+import { t as translate } from "../helpers/i18n";
 
 export let FIRST_RUN = db.query("SELECT * FROM users").get() === null || false;
 
@@ -78,48 +79,48 @@ export const user = new Elysia()
             sm:px-4
           `}
         >
-          <h1 class="my-8 text-3xl">Welcome to ConvertX!</h1>
+          <h1 class="my-8 text-3xl">{translate('welcome_to_convertx')}</h1>
           <article class="article p-0">
-            <header class="w-full bg-neutral-800 p-4">Create your account</header>
+            <header class="w-full bg-neutral-800 p-4">{translate('create_account')}</header>
             <form method="post" action={`${WEBROOT}/register`} class="p-4">
               <fieldset class="mb-4 flex flex-col gap-4">
                 <label class="flex flex-col gap-1">
-                  Email
+                  {translate('email')}
                   <input
                     type="email"
                     name="email"
                     class="rounded-sm bg-neutral-800 p-3"
-                    placeholder="Email"
+                    placeholder={translate('email')}
                     autocomplete="email"
                     required
                   />
                 </label>
                 <label class="flex flex-col gap-1">
-                  Password
+                  {translate('password')}
                   <input
                     type="password"
                     name="password"
                     class="rounded-sm bg-neutral-800 p-3"
-                    placeholder="Password"
+                    placeholder={translate('password')}
                     autocomplete="current-password"
                     required
                   />
                 </label>
               </fieldset>
-              <input type="submit" value="Create account" class="btn-primary" />
+              <input type="submit" value={translate('create_account_button')} class="btn-primary" />
             </form>
             <footer class="p-4">
-              Report any issues on{" "}
-              <a
-                class={`
-                  text-accent-500 underline
-                  hover:text-accent-400
-                `}
-                href="https://github.com/C4illin/ConvertX"
-              >
-                GitHub
-              </a>
-              .
+              {translate('report_issues_on')}{
+                <a
+                  class={`
+                    text-accent-500 underline
+                    hover:text-accent-400
+                  `}
+                  href="https://github.com/C4illin/ConvertX"
+                >
+                  GitHub
+                </a>
+              }.
             </footer>
           </article>
         </main>
@@ -172,7 +173,7 @@ export const user = new Elysia()
                     />
                   </label>
                 </fieldset>
-                <input type="submit" value="Register" class="w-full btn-primary" />
+                <input type="submit" value={translate('register_button')} class="w-full btn-primary" />
               </form>
             </article>
           </main>
@@ -195,7 +196,7 @@ export const user = new Elysia()
       if (existingUser) {
         set.status = 400;
         return {
-          message: "Email already in use.",
+          message: translate('email_already_in_use'),
         };
       }
       const savedPassword = await Bun.password.hash(password);

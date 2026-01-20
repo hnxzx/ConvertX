@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import db from "../db/db";
 import { Filename, Jobs } from "../db/types";
 import { ALLOW_UNAUTHENTICATED, HIDE_HISTORY, LANGUAGE, TIMEZONE, WEBROOT } from "../helpers/env";
+import { t as translate } from "../helpers/i18n";
 import { userService } from "./user";
 import { EyeIcon } from "../icons/eye";
 import { DeleteIcon } from "../icons/delete";
@@ -296,7 +297,7 @@ export const history = new Elysia().use(userService).get(
 
                   if (jobIds.length === 0) return;
 
-                  const confirmed = confirm(\`Are you sure you want to delete \${jobIds.length} job(s)? This action cannot be undone.\`);
+                  const confirmed = confirm('Are you sure you want to delete ' + jobIds.length + ' job(s)? This action cannot be undone.');
                   if (!confirmed) return;
 
                   try {
@@ -309,13 +310,13 @@ export const history = new Elysia().use(userService).get(
                     });
 
                     if (!response.ok) {
-                      throw new Error(\`HTTP error! status: \${response.status}\`);
+                      throw new Error('HTTP error! status: ' + response.status);
                     }
 
                     const result = await response.json();
 
                     if (result.success || result.deleted > 0) {
-                      alert(\`Successfully deleted \${result.deleted} job(s).\${result.failed > 0 ? \` Failed to delete \${result.failed} job(s).\` : ''}\`);
+                      alert('Successfully deleted ' + result.deleted + ' job(s).' + (result.failed > 0 ? ' Failed to delete ' + result.failed + ' job(s).' : ''));
                       window.location.reload();
                     } else {
                       alert('Failed to delete jobs. Please try again.');

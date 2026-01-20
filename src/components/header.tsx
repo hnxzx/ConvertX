@@ -1,3 +1,5 @@
+import { t as translate } from "../helpers/i18n";
+
 export const Header = ({
   loggedIn,
   accountRegistration,
@@ -24,7 +26,7 @@ export const Header = ({
               `}
               href={`${webroot}/history`}
             >
-              History
+              {translate('history')}
             </a>
           </li>
         )}
@@ -37,7 +39,7 @@ export const Header = ({
               `}
               href={`${webroot}/account`}
             >
-              Account
+              {translate('account')}
             </a>
           </li>
         ) : null}
@@ -50,7 +52,7 @@ export const Header = ({
               `}
               href={`${webroot}/logoff`}
             >
-              Logout
+              {translate('logout')}
             </a>
           </li>
         ) : null}
@@ -61,14 +63,14 @@ export const Header = ({
       <ul class="flex gap-4">
         <li>
           <a
-            class={`
-              text-accent-600 transition-all
-              hover:text-accent-500 hover:underline
-            `}
-            href={`${webroot}/login`}
-          >
-            Login
-          </a>
+              class={`
+                text-accent-600 transition-all
+                hover:text-accent-500 hover:underline
+              `}
+              href={`${webroot}/login`}
+            >
+              {translate('login')}
+            </a>
         </li>
         {accountRegistration ? (
           <li>
@@ -79,7 +81,7 @@ export const Header = ({
               `}
               href={`${webroot}/register`}
             >
-              Register
+              {translate('register')}
             </a>
           </li>
         ) : null}
